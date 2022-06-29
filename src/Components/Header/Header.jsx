@@ -8,10 +8,10 @@ const Header = () => {
             <div className={styles.left}>
 
                 <h1 className={styles.heading}>
-                    A <span>Resume</span> that stands out !
+                    A <span className='fw-bold'>Resume</span> that stands out !
                 </h1>
                 <h2 className={styles.heading}>
-                    Make your own resume. <span>It's free</span>
+                    Make your own resume. <span className='fw-bold'>It's free</span>
                 </h2>
             </div>
 
