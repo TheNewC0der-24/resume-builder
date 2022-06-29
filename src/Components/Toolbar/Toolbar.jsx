@@ -35,6 +35,9 @@ const Toolbar = () => {
                     <button className={`${styles.downloadBtn} btn btn-primary`}>Download<BiDownload className='fs-4 ms-1' /></button>
                 </div>
             </div>
+            <div>
+                <Editor sections={sections} />
+            </div>
 
         </div>
     )
