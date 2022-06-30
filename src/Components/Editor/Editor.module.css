@@ -28,3 +28,19 @@
     justify-content: center;
     margin: auto;
 }
+
+.saveBtn {
+    background-color: #239ce2 !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    font-weight: bold !important;
+    letter-spacing: 1px !important;
+    transition: all 0.2s;
+}
+
+.saveBtn:active {
+    transform: translateY(2px);
+}
