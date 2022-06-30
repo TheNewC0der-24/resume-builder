@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Toolbar.module.css';
 import Editor from '../Editor/Editor';
 
@@ -56,6 +56,10 @@ const Toolbar = () => {
         },
     })
 
+    useEffect(() => {
+        console.log(resumeInfo)
+    }, [resumeInfo]);
+
     return (
         <div className='container'>
             <h1 className='text-center my-5'>Resume Builder</h1>
@@ -74,7 +78,7 @@ const Toolbar = () => {
                 </div>
             </div>
             <div>
-                <Editor sections={sections} info={resumeInfo} />
+                <Editor sections={sections} info={resumeInfo} setInfo={setResumeInfo} />
             </div>
 
         </div >
