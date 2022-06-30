@@ -62,7 +62,7 @@ const Toolbar = () => {
 
     return (
         <div className='container'>
-            <h1 className='text-center my-5'>Resume Builder</h1>
+            <h1 className={`${styles.heading} text-center my-5`}>Resume Builder</h1>
             <div className="row">
                 <div className={`${styles.colors} col-md-6 d-flex justify-content-center gap-3`}>
                     {colors.map((item) => (
@@ -74,7 +74,9 @@ const Toolbar = () => {
                     ))}
                 </div>
                 <div className={`${styles.margin} col-md-6 text-center`}>
-                    <button className={`${styles.downloadBtn} btn btn-primary`}>Download<BiDownload className='fs-4 ms-1' /></button>
+                    <button className={`${styles.downloadBtn} btn btn-primary`}><span>Download</span>
+                        {/* <BiDownload className='fs-4 ms-1' /> */}
+                    </button>
                 </div>
             </div>
             <div>

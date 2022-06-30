@@ -1,3 +1,20 @@
+.heading {
+    font-family: Arial, Helvetica, sans-serif;
+    color: transparent;
+    -webkit-text-stroke: 1px #239ce2;
+    background: url('../../assets/back.png');
+    background-color: #239ce2;
+    -webkit-background-clip: text;
+    background-position: 0 0;
+    animation: back 20s linear infinite;
+}
+
+@keyframes back {
+    100% {
+        background-position: 2000px 0;
+    }
+}
+
 .colors .active {
     border: 2px solid #000;
 }
@@ -7,14 +24,49 @@
 }
 
 .downloadBtn {
-    background-color: #239ce2 !important;
-    color: #fff !important;
     text-decoration: none !important;
     outline: 0 !important;
     box-shadow: none !important;
     border: none !important;
-    font-weight: bold !important;
-    letter-spacing: 1px !important;
+    display: inline-block;
+    border-radius: 7px;
+    background: #239ce2;
+    color: white;
+    text-align: center;
+    width: 10em;
+    transition: all 0.4s;
+    cursor: pointer;
+}
+
+.downloadBtn:hover,
+.downloadBtn:focus {
+    background: #1f8ece;
+}
+
+.downloadBtn span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.4s;
+}
+
+.downloadBtn span:after {
+    content: 'for free';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.7s;
+}
+
+.downloadBtn:hover span {
+    padding-right: 3.55em;
+}
+
+.downloadBtn:hover span:after {
+    opacity: 4;
+    background-color: transparent;
+    right: 0;
 }
 
 .main {
