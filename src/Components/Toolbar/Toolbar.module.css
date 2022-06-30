@@ -24,7 +24,7 @@
     width: 100%;
 }
 
-@media(max-width: 767px) {
+@media(max-width: 767.5px) {
     .margin {
         margin-top: 2rem !important;
     }
