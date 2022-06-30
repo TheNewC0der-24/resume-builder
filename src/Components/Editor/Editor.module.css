@@ -1,5 +1,30 @@
+.card {
+    border-color: #239ce2;
+}
+
+.header {
+    border-bottom-color: #239ce2;
+    background-color: #239ce2;
+    color: #000;
+}
+
 .active {
-    border-bottom: 2px solid #239ce2;
-    color: #239ce2;
+    border-bottom: 2px solid white;
+    color: white;
     font-weight: bold;
+}
+
+.activeChip {
+    background-color: #239ce2;
+    /* color: white; */
+}
+
+.title {
+    border-bottom: 2px solid #239ce2;
+    background-clip: text;
+    background-image: linear-gradient(to right, #239ce2, #1369b9);
+    color: transparent;
+    width: max-content;
+    justify-content: center;
+    margin: auto;
 }
