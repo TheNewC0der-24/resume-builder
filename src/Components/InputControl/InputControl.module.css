@@ -1,0 +1,9 @@
+.input {
+    text-decoration: none !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
+input:focus {
+    border-color: #239ce2 !important;
+}
