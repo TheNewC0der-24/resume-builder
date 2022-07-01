@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styles from './Toolbar.module.css';
 import Editor from '../Editor/Editor';
 
-import { BiDownload } from 'react-icons/bi';
-
 const Toolbar = () => {
 
     const colors = ["#00b0ff", "#00bfa6", "#f50057", "#536dfe", "#f9a826"]
