@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Header.module.css';
-import resume from '../../assets/resume.svg';
+import resume from '../../assets/Resume.svg';
 
 const Header = () => {
     return (
