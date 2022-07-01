@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './Toolbar.module.css';
 import Editor from '../Editor/Editor';
 
@@ -52,11 +52,7 @@ const Toolbar = () => {
             sectionTitle: sections.others,
             detail: "",
         },
-    })
-
-    useEffect(() => {
-        console.log(resumeInfo)
-    }, [resumeInfo]);
+    });
 
     return (
         <div className='container'>
@@ -72,8 +68,8 @@ const Toolbar = () => {
                     ))}
                 </div>
                 <div className={`${styles.margin} col-md-6 text-center`}>
-                    <button className={`${styles.downloadBtn} btn btn-primary`}><span>Download</span>
-                        {/* <BiDownload className='fs-4 ms-1' /> */}
+                    <button className={`${styles.downloadBtn} btn btn-primary`}>
+                        <span>Download</span>
                     </button>
                 </div>
             </div>
@@ -81,7 +77,7 @@ const Toolbar = () => {
                 <Editor sections={sections} info={resumeInfo} setInfo={setResumeInfo} />
             </div>
 
-        </div >
+        </div>
     )
 }
 

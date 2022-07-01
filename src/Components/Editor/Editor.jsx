@@ -429,6 +429,34 @@ const Editor = (props) => {
         // eslint-disable-next-line
     }, [activeSection]);
 
+    useEffect(() => {
+        setActiveInfo(info[sections[activeSection]]);
+    }, [activeSection, info, sections]);
+
+    useEffect(() => {
+        const details = activeInfo?.details;
+        if (!details) return;
+
+        const activeInformation = info[sections[activeSection]];
+
+        setValues({
+            role: activeInformation.details[activeDetailIndex]?.role || "",
+            companyName: activeInformation.details[activeDetailIndex]?.companyName || "",
+            certificateLink: activeInformation.details[activeDetailIndex]?.certificateLink || "",
+            location: activeInformation.details[activeDetailIndex]?.location || "",
+            startDate: activeInformation.details[activeDetailIndex]?.startDate || "",
+            endDate: activeInformation.details[activeDetailIndex]?.endDate || "",
+            projectName: activeInformation.details[activeDetailIndex]?.projectName || "",
+            overview: activeInformation.details[activeDetailIndex]?.overview || "",
+            deployedLink: activeInformation.details[activeDetailIndex]?.deployedLink || "",
+            githubRepoLink: activeInformation.details[activeDetailIndex]?.githubRepoLink || "",
+            degree: activeInformation.details[activeDetailIndex]?.degree || "",
+            collegeName: activeInformation.details[activeDetailIndex]?.collegeName || "",
+            points: activeInformation.details[activeDetailIndex]?.points || "",
+
+        });
+    }, [activeDetailIndex]);
+
     const handleSave = () => {
         switch (sections[activeSection]) {
             case sections.basicInfo:
@@ -441,13 +469,13 @@ const Editor = (props) => {
                         email: values.email,
                         phone: values.phone
                     }
-                    props.setInfo(prev => ({
+                    props.setInfo((prev) => ({
                         ...prev,
                         [sections.basicInfo]: {
                             ...prev[sections.basicInfo],
                             detail: tempDetail,
                             sectionTitle,
-                        }
+                        },
                     }));
                     break;
                 }
@@ -464,11 +492,11 @@ const Editor = (props) => {
                     }
                     const tempDetails = [...info[sections.workExp]?.details];
                     tempDetails[activeDetailIndex] = tempDetail;
-                    props.setInfo(prev => ({
+                    props.setInfo((prev) => ({
                         ...prev,
                         [sections.workExp]: {
                             ...prev[sections.workExp],
-                            detail: tempDetails,
+                            details: tempDetails,
                             sectionTitle,
                         }
                     }));
@@ -485,11 +513,11 @@ const Editor = (props) => {
                     }
                     const tempDetails = [...info[sections.project]?.details];
                     tempDetails[activeDetailIndex] = tempDetail;
-                    props.setInfo(prev => ({
+                    props.setInfo((prev) => ({
                         ...prev,
                         [sections.project]: {
                             ...prev[sections.project],
-                            detail: tempDetails,
+                            details: tempDetails,
                             sectionTitle,
                         }
                     }));
@@ -505,11 +533,11 @@ const Editor = (props) => {
                     }
                     const tempDetails = [...info[sections.education]?.details];
                     tempDetails[activeDetailIndex] = tempDetail;
-                    props.setInfo(prev => ({
+                    props.setInfo((prev) => ({
                         ...prev,
                         [sections.education]: {
                             ...prev[sections.education],
-                            detail: tempDetails,
+                            details: tempDetails,
                             sectionTitle,
                         }
                     }));
@@ -518,11 +546,11 @@ const Editor = (props) => {
             case sections.achievements:
                 {
                     const tempPoints = values.points;
-                    props.setInfo(prev => ({
+                    props.setInfo((prev) => ({
                         ...prev,
                         [sections.achievements]: {
                             ...prev[sections.achievements],
-                            detail: tempPoints,
+                            points: tempPoints,
                             sectionTitle,
                         }
                     }));
@@ -531,7 +559,7 @@ const Editor = (props) => {
             case sections.summary:
                 {
                     const tempDetail = values.summary;
-                    props.setInfo(prev => ({
+                    props.setInfo((prev) => ({
                         ...prev,
                         [sections.summary]: {
                             ...prev[sections.summary],
@@ -544,7 +572,7 @@ const Editor = (props) => {
             case sections.others:
                 {
                     const tempDetail = values.others;
-                    props.setInfo(prev => ({
+                    props.setInfo((prev) => ({
                         ...prev,
                         [sections.others]: {
                             ...prev[sections.others],
@@ -555,9 +583,43 @@ const Editor = (props) => {
                     break;
                 }
             default:
-                break;
+                return null;
         }
     }
+
+    const handleAdd = () => {
+        const details = activeInfo?.details;
+        if (!details) return;
+
+        const lastDetail = details.slice(-1)[0];
+        if (!Object.keys(lastDetail).length) return;
+        details.push({});
+
+        props.setInfo(prev => ({
+            ...prev, [sections[activeSection]]:
+            {
+                ...info[sections[activeSection]],
+                details: details
+            }
+        }));
+        setActiveDetailIndex(details.length - 1);
+    };
+
+    const handleDelete = (index) => {
+        const details = activeInfo?.details ? [...activeInfo?.details] : "";
+        if (!details) return;
+
+        details.splice(index, 1);
+
+        props.setInfo((prev) => ({
+            ...prev, [sections[activeSection]]:
+            {
+                ...info[sections[activeSection]],
+                details: details
+            }
+        }));
+        setActiveDetailIndex((prev) => (prev === index ? 0 : prev - 1));
+    };
 
     return (
         <div className='container'>
@@ -573,21 +635,34 @@ const Editor = (props) => {
                 </div>
                 <div className='card-body'>
                     <h2 className={`${styles.title} card-title fw-bold`}>{sectionTitle}</h2>
-                    <div className='container d-flex gap-3 my-2'>
+                    <div className={`${styles.chip} container d-flex justify-content-center gap-3 my-4`}>
                         {
-                            activeInfo?.details ? activeInfo.details?.map((item, index) => (
-                                <h4>
+                            activeInfo?.details ? activeInfo?.details?.map((item, index) => (
+                                <h5>
                                     <span
-                                        className={`${activeDetailIndex === index ? styles.activeChip : ""} badge rounded-pill bg-secondary`}
+                                        className={`${styles.badge} ${activeDetailIndex === index ? styles.activeChip : ""} badge rounded-pill`}
                                         key={item.title + index}
                                         onClick={() => setActiveDetailIndex(index)}
                                     >
                                         {sections[activeSection]} {index + 1}
-                                        <FaTimes className='ms-3 fs-4' style={{ cursor: 'pointer' }} />
+                                        <FaTimes className='ms-3' style={{ cursor: 'pointer' }} onClick={(event) => {
+                                            event.stopPropagation();
+                                            handleDelete(index)
+                                        }}
+                                        />
                                     </span>
-                                </h4>
-                            )) : null
+                                </h5>
+                            )) : ""
                         }
+                        {
+                            activeInfo?.details &&
+                                activeInfo?.details?.length > 0 ? (
+                                <div className={styles.new} onClick={handleAdd}>
+                                    +New
+                                </div>
+                            ) : (
+                                ""
+                            )}
                     </div>
                     {generateForm()}
                     <div className="d-grid col-4 mx-auto">
