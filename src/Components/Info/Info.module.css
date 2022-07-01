@@ -1,0 +1,22 @@
+.container {
+    overflow-x: hidden;
+}
+
+.left {
+    background-color: #239ce2;
+}
+
+.right {
+    background-color: #1369b9;
+}
+
+@media (max-width: 767.5px) {
+    .container {
+        text-align: center;
+    }
+
+    .info {
+        margin-left: 0 !important;
+        margin-top: 0 !important;
+    }
+}
