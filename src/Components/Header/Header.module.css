@@ -2,7 +2,6 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    text-align: center;
     width: 100%;
     padding: 50px 30px;
     gap: 30px;
@@ -22,8 +21,13 @@
     color: transparent;
 }
 
+.para {
+    background-color: #1369b9;
+    color: white !important;
+}
+
 .right img {
-    width: 100%;
+    width: 400px;
     max-width: 100%;
     height: auto;
     filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
@@ -33,6 +37,7 @@
 @media (max-width: 820px) {
     .container {
         flex-direction: column-reverse;
+        text-align: center;
     }
 }
 
