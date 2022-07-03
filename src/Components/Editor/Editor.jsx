@@ -626,7 +626,7 @@ const Editor = (props) => {
         <div className='container'>
             <div className={`${styles.card} card my-5`}>
                 <div className={`${styles.header} card-header`}>
-                    <nav className="nav d-flex justify-content-between gx-3" style={{ cursor: "pointer" }}>
+                    <nav className="nav d-flex justify-content-center gx-3" style={{ cursor: "pointer" }}>
                         {Object.keys(sections)?.map((key) => (
                             <div className={`fw-bold mx-2 ${activeSection === key ? styles.active : ""}`} onClick={() => setActiveSection(key)} key={key}>
                                 {sections[key]}
