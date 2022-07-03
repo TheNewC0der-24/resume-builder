@@ -455,6 +455,7 @@ const Editor = (props) => {
             points: activeInformation.details[activeDetailIndex]?.points || "",
 
         });
+        // eslint-disable-next-line
     }, [activeDetailIndex]);
 
     const handleSave = () => {
