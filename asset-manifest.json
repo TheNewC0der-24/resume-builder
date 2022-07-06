@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/resume-builder/static/css/main.78feeec0.css",
+    "main.js": "/resume-builder/static/js/main.a816716f.js",
+    "static/media/summary-skills.png": "/resume-builder/static/media/summary-skills.7b2710ec763484a21ab4.png",
+    "static/media/Resume.svg": "/resume-builder/static/media/Resume.8d03346a950b55ea5c8b98a848e8b71f.svg",
+    "index.html": "/resume-builder/index.html",
+    "main.78feeec0.css.map": "/resume-builder/static/css/main.78feeec0.css.map",
+    "main.a816716f.js.map": "/resume-builder/static/js/main.a816716f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.78feeec0.css",
+    "static/js/main.a816716f.js"
+  ]
+}
