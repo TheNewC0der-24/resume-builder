@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, forwardRef } from 'react';
 import styles from './Resume.module.css';
 
 import { FaLinkedinIn, FaGithub, FaPhoneAlt, FaAt, FaCalendar, FaLink } from 'react-icons/fa';
 import { IoLocationSharp } from 'react-icons/io5';
 
-const Resume = (props) => {
+const Resume = forwardRef((props, ref) => {
 
     const info = props.info;
     const sections = props.sections;
@@ -39,22 +39,22 @@ const Resume = (props) => {
                         information.workExp.details.map((item) => (
                             <div key={item.title} className={styles.item}>
                                 {
-                                    item.role && <h5>{item.role}</h5>
+                                    item.role ? <h5>{item.role}</h5> : <div />
                                 }
                                 {
-                                    item.companyName && <h5 className={styles.color}>{item.companyName}</h5>
+                                    item.companyName ? <h5 className={styles.color}>{item.companyName}</h5> : <div />
                                 }
                                 {
-                                    item.location &&
-                                    <p>
-                                        <IoLocationSharp className={`${styles.color} me-1`} />{item.location}
-                                    </p>
+                                    item.location ?
+                                        <p>
+                                            <IoLocationSharp className={`${styles.color} me-1`} />{item.location}
+                                        </p> : <div />
                                 }
                                 {
-                                    item.certificateLink &&
-                                    <a href={item.certificateLink} target='_blank' rel="noreferrer" className={`${styles.color} text-decoration-none mt-3`}>
-                                        <FaLink className='me-1' />{item.certificateLink}
-                                    </a>
+                                    item.certificateLink ?
+                                        <a href={item.certificateLink} target='_blank' rel="noreferrer" className={`${styles.color} text-decoration-none mt-3`}>
+                                            <FaLink className='me-1' />{item.certificateLink}
+                                        </a> : <div />
                                 }
                                 {
                                     item.startDate && item.endDate ? (
@@ -62,7 +62,7 @@ const Resume = (props) => {
                                             <FaCalendar className={`${styles.color} me-1`} />{getFormatDate(item.startDate)} - {getFormatDate(item.endDate)}
                                         </p>
                                     ) : (
-                                        ("")
+                                        <div />
                                     )
                                 }
                                 {
@@ -91,29 +91,29 @@ const Resume = (props) => {
                         information.project.details.map((item) => (
                             <div key={item.title} className={styles.item}>
                                 {
-                                    item.projectName && <h5 className={styles.color}>{item.projectName}</h5>
+                                    item.projectName ? <h5 className={styles.color}>{item.projectName}</h5> : <div />
                                 }
                                 {
-                                    item.overview && <p align='justify'>{item.overview}</p>
+                                    item.overview ? <p align='justify'>{item.overview}</p> : <div />
                                 }
                                 <div className='row'>
                                     {
-                                        item.deployedLink &&
-                                        <a href={item.deployedLink} target='_blank' rel="noreferrer" className={`${styles.color} text-decoration-none mt-2`}>
-                                            <FaLink className='me-1' />Deployed Link
-                                        </a>
+                                        item.deployedLink ?
+                                            <a href={item.deployedLink} target='_blank' rel="noreferrer" className={`${styles.color} text-decoration-none mt-2`}>
+                                                <FaLink className='me-1' />Deployed Link
+                                            </a> : <div />
 
                                     }
                                     {
-                                        item.githubRepoLink &&
-                                        <a href={item.githubRepoLink} target='_blank' rel="noreferrer" className={`${styles.color} text-decoration-none my-2`}>
-                                            <FaGithub className='me-1' />Repo Link
-                                        </a>
+                                        item.githubRepoLink ?
+                                            <a href={item.githubRepoLink} target='_blank' rel="noreferrer" className={`${styles.color} text-decoration-none my-2`}>
+                                                <FaGithub className='me-1' />Repo Link
+                                            </a> : <div />
                                     }
                                 </div>
                                 {
-                                    item.points?.length > 0 && (
-                                        <p className='mt-3'>Description :
+                                    item.points?.length > 0 ? (
+                                        <p>Description :
                                             <ul>
                                                 {item.points.map((elem, index) => (
                                                     <li key={elem + index}>
@@ -122,6 +122,8 @@ const Resume = (props) => {
                                                 ))}
                                             </ul>
                                         </p>
+                                    ) : (
+                                        <div />
                                     )
                                 }
                             </div>
@@ -138,10 +140,10 @@ const Resume = (props) => {
                         information.education.details.map((item) => (
                             <div key={item.title} className={styles.item}>
                                 {
-                                    item.degree && <h5>{item.degree}</h5>
+                                    item.degree ? <h5>{item.degree}</h5> : <div />
                                 }
                                 {
-                                    item.collegeName && <h5 className={styles.color}>{item.collegeName}</h5>
+                                    item.collegeName ? <h5 className={styles.color}>{item.collegeName}</h5> : <div />
                                 }
                                 {
                                     item.startDate && item.endDate ? (
@@ -149,7 +151,7 @@ const Resume = (props) => {
                                             <FaCalendar className={`${styles.color} me-1`} />{getFormatDate(item.startDate)} - {getFormatDate(item.endDate)}
                                         </p>
                                     ) : (
-                                        ("")
+                                        <div />
                                     )
                                 }
                             </div>
@@ -173,7 +175,7 @@ const Resume = (props) => {
                             }
                         </ul>
                     ) : (
-                        ""
+                        <div />
                     )
                 }
             </div>,
@@ -242,9 +244,8 @@ const Resume = (props) => {
 
     return (
         <>
-            <div className="my-5">
-                <h1 className='text-center'>Resume Template</h1>
-                <div className="card">
+            <div className="mb-5 mt-3">
+                <div className="card" ref={ref}>
                     <div ref={containerRef} className={`${styles.container} card-body`}>
                         <div className={`${styles.header} card-header`}>
                             <h1>{information.basicInfo?.detail?.name}</h1>
@@ -252,46 +253,54 @@ const Resume = (props) => {
 
                             <div className={`${styles.links} mt-4 d-flex gap-5`}>
                                 {
-                                    information.basicInfo?.detail?.email &&
-                                    (
-                                        <a href={`mailto:${information.basicInfo?.detail?.email}`} type='email'>
-                                            <FaAt className={`${styles.linkIcon} me-1`} />{information.basicInfo?.detail?.email}
-                                        </a>
-                                    )
+                                    information.basicInfo?.detail?.email ?
+                                        (
+                                            <a href={`mailto:${information.basicInfo?.detail?.email}`} type='email'>
+                                                <FaAt className={`${styles.linkIcon} me-1`} />{information.basicInfo?.detail?.email}
+                                            </a>
+                                        ) : (
+                                            <div />
+                                        )
                                 }
                                 {
-                                    information.basicInfo?.detail?.phone &&
-                                    (
-                                        <a href={`tel:${information.basicInfo?.detail?.phone}`}>
-                                            <FaPhoneAlt className={`${styles.linkIcon} me-1`} />{information.basicInfo?.detail?.phone}
-                                        </a>
-                                    )
+                                    information.basicInfo?.detail?.phone ?
+                                        (
+                                            <a href={`tel:${information.basicInfo?.detail?.phone}`}>
+                                                <FaPhoneAlt className={`${styles.linkIcon} me-1`} />{information.basicInfo?.detail?.phone}
+                                            </a>
+                                        ) : (
+                                            <div />
+                                        )
                                 }
                                 {
-                                    information.basicInfo?.detail?.linkedin &&
-                                    (
-                                        <a href={information.basicInfo?.detail?.linkedin} target="_blank" rel="noreferrer">
-                                            <FaLinkedinIn className={`${styles.linkIcon} me-1`} />{information.basicInfo?.detail?.linkedin}
-                                        </a>
-                                    )
+                                    information.basicInfo?.detail?.linkedin ?
+                                        (
+                                            <a href={information.basicInfo?.detail?.linkedin} target="_blank" rel="noreferrer">
+                                                <FaLinkedinIn className={`${styles.linkIcon} me-1`} />{information.basicInfo?.detail?.linkedin}
+                                            </a>
+                                        ) : (
+                                            <div />
+                                        )
                                 }
                                 {
-                                    information.basicInfo?.detail?.github &&
-                                    (
-                                        <a href={information.basicInfo?.detail?.github} target="_blank" rel="noreferrer">
-                                            <FaGithub className={`${styles.linkIcon} me-1`} />{information.basicInfo?.detail?.github}
-                                        </a>
-                                    )
+                                    information.basicInfo?.detail?.github ?
+                                        (
+                                            <a href={information.basicInfo?.detail?.github} target="_blank" rel="noreferrer">
+                                                <FaGithub className={`${styles.linkIcon} me-1`} />{information.basicInfo?.detail?.github}
+                                            </a>
+                                        ) : (
+                                            <div />
+                                        )
                                 }
                             </div>
                         </div>
                         <div className='row mt-5'>
-                            <div className='col-md-7'>
+                            <div className='col-sm-7'>
                                 {
                                     columns[0].map(item => sectionDivs[item])
                                 }
                             </div>
-                            <div className='col-md-5'>
+                            <div className='col-sm-5'>
                                 {
                                     columns[1].map(item => sectionDivs[item])
                                 }
@@ -302,6 +311,6 @@ const Resume = (props) => {
             </div>
         </>
     )
-}
+});
 
 export default Resume;

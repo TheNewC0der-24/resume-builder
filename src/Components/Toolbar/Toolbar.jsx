@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './Toolbar.module.css';
 import Editor from '../Editor/Editor';
 import Resume from '../Resume/Resume';
+
+import ReactToPrint from 'react-to-print';
 
 const Toolbar = () => {
 
@@ -57,6 +59,8 @@ const Toolbar = () => {
 
     const [activeColor, setActiveColor] = useState(colors[0]);
 
+    const resumeRef = useRef();
+
     return (
         <div className='container'>
             <h1 className={`${styles.heading} text-center my-5`}>Resume Builder</h1>
@@ -71,16 +75,24 @@ const Toolbar = () => {
                         />
                     ))}
                 </div>
-                <div className={`${styles.margin} col-md-6 text-center`}>
-                    <button className={`${styles.downloadBtn} btn btn-primary`}>
-                        <span>Download</span>
-                    </button>
-                </div>
+                <ReactToPrint
+                    trigger={() => {
+                        return (
+                            <div className={`${styles.margin} col-md-6 text-center`}>
+                                <button className={`${styles.downloadBtn} btn btn-primary`}>
+                                    <span>Download</span>
+                                </button>
+                            </div>
+                        );
+                    }}
+                    content={() => resumeRef.current}
+                />
             </div>
             <div>
                 <Editor sections={sections} info={resumeInfo} setInfo={setResumeInfo} />
             </div>
-            <Resume sections={sections} info={resumeInfo} activeColor={activeColor} />
+            <h1 className='text-center mt-5'>Resume Template</h1>
+            <Resume ref={resumeRef} sections={sections} info={resumeInfo} activeColor={activeColor} />
         </div>
     )
 }
