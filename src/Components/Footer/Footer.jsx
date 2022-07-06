@@ -91,6 +91,11 @@ const Footer = () => {
                         >
                             <FaGithub />
                         </a>
+                        <div className="d-flex justify-content-center mt-2">
+                            <a className='text-decoration-none text-dark fs-3 fw-bold' href="https://www.buymeacoffee.com/bhavyakhurana" target='_blank' rel="noreferrer"> Support :
+                                <img className='img-fluid ms-2' src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-1.svg" height="50" width="150" alt="Bhavya Khurana" ></img>
+                            </a>
+                        </div>
                     </section>
                 </div>
 
