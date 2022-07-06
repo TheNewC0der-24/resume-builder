@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Toolbar.module.css';
 import Editor from '../Editor/Editor';
+import Resume from '../Resume/Resume';
 
 const Toolbar = () => {
 
@@ -76,7 +77,7 @@ const Toolbar = () => {
             <div>
                 <Editor sections={sections} info={resumeInfo} setInfo={setResumeInfo} />
             </div>
-
+            <Resume sections={sections} info={resumeInfo} />
         </div>
     )
 }
