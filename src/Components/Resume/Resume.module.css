@@ -6,6 +6,10 @@
     --color: #239ce2;
 }
 
+.color {
+    color: var(--color);
+}
+
 .links {
     flex-wrap: wrap;
 }
@@ -16,16 +20,13 @@
 }
 
 .linkIcon {
-    color: #dc3545;
+    color: var(--color);
 }
 
 .heading {
     font-weight: bold;
     border-bottom: 2px solid #000;
-}
-
-.hidden {
-    display: none;
+    cursor: all-scroll;
 }
 
 .content .item {
@@ -33,14 +34,16 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
-    width: auto;
-    max-width: 15rem;
     margin-bottom: 1rem;
     padding-bottom: 10px;
 }
 
 .content .item:last-child {
     border-bottom: none;
+}
+
+p {
+    margin-bottom: 0 !important;
 }
 
 @media (max-width : 767.5px) {

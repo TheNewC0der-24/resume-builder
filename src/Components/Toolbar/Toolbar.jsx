@@ -55,6 +55,8 @@ const Toolbar = () => {
         },
     });
 
+    const [activeColor, setActiveColor] = useState(colors[0]);
+
     return (
         <div className='container'>
             <h1 className={`${styles.heading} text-center my-5`}>Resume Builder</h1>
@@ -64,7 +66,8 @@ const Toolbar = () => {
                         <span
                             key={item}
                             style={{ backgroundColor: item, width: "30px", height: "30px" }}
-                            className={`${styles.colorBtn} btn rounded-5`}
+                            className={`${styles.colorBtn} ${activeColor === item ? styles.active : ""} btn rounded-5`}
+                            onClick={() => setActiveColor(item)}
                         />
                     ))}
                 </div>
@@ -77,7 +80,7 @@ const Toolbar = () => {
             <div>
                 <Editor sections={sections} info={resumeInfo} setInfo={setResumeInfo} />
             </div>
-            <Resume sections={sections} info={resumeInfo} />
+            <Resume sections={sections} info={resumeInfo} activeColor={activeColor} />
         </div>
     )
 }

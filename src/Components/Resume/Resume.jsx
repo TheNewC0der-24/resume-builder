@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styles from './Resume.module.css';
 
 import { FaLinkedinIn, FaGithub, FaPhoneAlt, FaAt, FaCalendar, FaLink } from 'react-icons/fa';
@@ -42,24 +42,24 @@ const Resume = (props) => {
                                     item.role && <h5>{item.role}</h5>
                                 }
                                 {
-                                    item.companyName && <h5 className='text-danger'>{item.companyName}</h5>
+                                    item.companyName && <h5 className={styles.color}>{item.companyName}</h5>
                                 }
                                 {
                                     item.location &&
                                     <p>
-                                        <IoLocationSharp className='text-danger me-1' />{item.location}
+                                        <IoLocationSharp className={`${styles.color} me-1`} />{item.location}
                                     </p>
                                 }
                                 {
                                     item.certificateLink &&
-                                    <a href={item.certificateLink} target='_blank' rel="noreferrer" className='text-danger text-decoration-none'>
+                                    <a href={item.certificateLink} target='_blank' rel="noreferrer" className={`${styles.color} text-decoration-none mt-3`}>
                                         <FaLink className='me-1' />{item.certificateLink}
                                     </a>
                                 }
                                 {
                                     item.startDate && item.endDate ? (
                                         <p className='mt-3'>
-                                            <FaCalendar className='text-danger me-1' />{getFormatDate(item.startDate)} - {getFormatDate(item.endDate)}
+                                            <FaCalendar className={`${styles.color} me-1`} />{getFormatDate(item.startDate)} - {getFormatDate(item.endDate)}
                                         </p>
                                     ) : (
                                         ("")
@@ -67,7 +67,7 @@ const Resume = (props) => {
                                 }
                                 {
                                     item.points?.length > 0 && (
-                                        <p>Work Description :
+                                        <p className='mt-3'>Work Description :
                                             <ul>
                                                 {item.points.map((elem, index) => (
                                                     <li key={elem + index}>
@@ -91,25 +91,29 @@ const Resume = (props) => {
                         information.project.details.map((item) => (
                             <div key={item.title} className={styles.item}>
                                 {
-                                    item.projectName && <h5 className='text-danger'>{item.projectName}</h5>
+                                    item.projectName && <h5 className={styles.color}>{item.projectName}</h5>
                                 }
                                 {
                                     item.overview && <p align='justify'>{item.overview}</p>
                                 }
-                                {
-                                    item.deployedLink && item.githubRepoLink &&
-                                    <div className='row'>
-                                        <a href={item.deployedLink} className='text-danger text-decoration-none mb-2'>
-                                            <FaLink className='me-1' />Deployed Link : {item.deployedLink}
+                                <div className='row'>
+                                    {
+                                        item.deployedLink &&
+                                        <a href={item.deployedLink} target='_blank' rel="noreferrer" className={`${styles.color} text-decoration-none mt-2`}>
+                                            <FaLink className='me-1' />Deployed Link
                                         </a>
-                                        <a href={item.githubRepoLink} className='text-danger text-decoration-none mb-2'>
-                                            <FaGithub className='me-1' />Repo Link : {item.githubRepoLink}
+
+                                    }
+                                    {
+                                        item.githubRepoLink &&
+                                        <a href={item.githubRepoLink} target='_blank' rel="noreferrer" className={`${styles.color} text-decoration-none my-2`}>
+                                            <FaGithub className='me-1' />Repo Link
                                         </a>
-                                    </div>
-                                }
+                                    }
+                                </div>
                                 {
                                     item.points?.length > 0 && (
-                                        <p>Description :
+                                        <p className='mt-3'>Description :
                                             <ul>
                                                 {item.points.map((elem, index) => (
                                                     <li key={elem + index}>
@@ -137,12 +141,12 @@ const Resume = (props) => {
                                     item.degree && <h5>{item.degree}</h5>
                                 }
                                 {
-                                    item.collegeName && <h5 className='text-danger'>{item.collegeName}</h5>
+                                    item.collegeName && <h5 className={styles.color}>{item.collegeName}</h5>
                                 }
                                 {
                                     item.startDate && item.endDate ? (
-                                        <p className='mt-3'>
-                                            <FaCalendar className='text-danger me-1' />{getFormatDate(item.startDate)} - {getFormatDate(item.endDate)}
+                                        <p className='mt-2'>
+                                            <FaCalendar className={`${styles.color} me-1`} />{getFormatDate(item.startDate)} - {getFormatDate(item.endDate)}
                                         </p>
                                     ) : (
                                         ("")
@@ -158,34 +162,32 @@ const Resume = (props) => {
             <div className="mb-5" key={"achievement"} draggable onDragOver={() => setTarget(information.achievements.id)} onDragEnd={() => setSource(information.achievements.id)}>
                 <h3 className={`${styles.heading}`}>{information.achievements.sectionTitle}</h3>
                 {
-                    information.achievements.points.map((item) => (
-                        <div key={item.title}>
+                    information.achievements?.points?.length > 0 ? (
+                        <ul>
                             {
-                                item.points?.length > 0 && (
-                                    <ul>
-                                        {item.points.map((elem, index) => (
-                                            <li key={elem + index}>
-                                                {elem}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )
+                                information.achievements?.points.map((elem, index) => (
+                                    <li key={elem + index}>
+                                        {elem}
+                                    </li>
+                                ))
                             }
-                        </div>
-                    ))
+                        </ul>
+                    ) : (
+                        ""
+                    )
                 }
             </div>,
 
         [sections.summary]:
-            <div className="mb-5" key={"summary"} dragdraggable onDragOver={() => setTarget(information.summary.id)} onDragEnd={() => setSource(information.summary.id)}>
+            <div className="mb-5" key={"summary"} draggable onDragOver={() => setTarget(information.summary.id)} onDragEnd={() => setSource(information.summary.id)}>
                 <h3 className={`${styles.heading}`}>About Me</h3>
-                <p align='justify'>{info.summary?.summary}</p>
+                <p align='justify'>{information.summary?.detail}</p>
             </div>,
 
         [sections.others]:
             <div className="mb-5" key={"other"} draggable onDragOver={() => setTarget(information.others.id)} onDragEnd={() => setSource(information.others.id)}>
                 <h3 className={`${styles.heading}`}>{information.others.sectionTitle}</h3>
-                <p align='justify'>{info.others?.others}</p>
+                <p align='justify'>{information.others?.detail}</p>
             </div>
     }
 
@@ -229,15 +231,24 @@ const Resume = (props) => {
         // eslint-disable-next-line
     }, [source]);
 
+    const containerRef = useRef();
+
+    useEffect(() => {
+        const container = containerRef.current;
+        if (!props.activeColor || !container) return;
+
+        container.style.setProperty("--color", props.activeColor)
+    }, [props.activeColor]);
+
     return (
         <>
             <div className="my-5">
                 <h1 className='text-center'>Resume Template</h1>
                 <div className="card">
-                    <div className={`${container} card-body`}>
+                    <div ref={containerRef} className={`${styles.container} card-body`}>
                         <div className={`${styles.header} card-header`}>
                             <h1>{information.basicInfo?.detail?.name}</h1>
-                            <h5 className='text-danger'>{information.basicInfo?.detail?.title}</h5>
+                            <h5 className={styles.color}>{information.basicInfo?.detail?.title}</h5>
 
                             <div className={`${styles.links} mt-4 d-flex gap-5`}>
                                 {

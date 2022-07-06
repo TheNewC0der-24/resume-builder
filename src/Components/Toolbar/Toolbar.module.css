@@ -5,6 +5,7 @@
     background: url('../../assets/back.png');
     background-color: #239ce2;
     -webkit-background-clip: text;
+    background-clip: text;
     background-position: 0 0;
     animation: back 20s linear infinite;
 }
@@ -16,7 +17,7 @@
 }
 
 .colors .active {
-    border: 2px solid #000;
+    border: 2px solid #000 !important;
 }
 
 .colorBtn {
