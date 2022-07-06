@@ -331,25 +331,29 @@ const Editor = (props) => {
 
     const summaryBody = (
         <div className='container'>
-            <InputControl
-                Label="Summary"
+            <label className='form-label'>Summary</label>
+            <textarea
+                className={`${styles.textarea} form-control mb-3`}
+                rows="5"
                 placeholder="Enter your objective/summary"
                 value={values.summary}
                 onChange={(event) =>
                     setValues((prev) => ({ ...prev, summary: event.target.value }))
                 }
             />
-        </div>
+        </div >
     );
 
     const otherBody = (
         <div className='container'>
-            <InputControl
-                Label="Other"
+            <label className='form-label'>Other</label>
+            <textarea
+                className={`${styles.textarea} form-control mb-3`}
+                rows="3"
                 placeholder="Enter something"
-                value={values.other}
+                value={values.others}
                 onChange={(event) =>
-                    setValues((prev) => ({ ...prev, other: event.target.value }))
+                    setValues((prev) => ({ ...prev, others: event.target.value }))
                 }
             />
         </div>
@@ -411,7 +415,7 @@ const Editor = (props) => {
             summary: typeof activeInfo?.detail !== "object" ? activeInfo.detail : "",
 
             // Others
-            other: typeof activeInfo?.detail !== "object" ? activeInfo.detail : "",
+            others: typeof activeInfo?.detail !== "object" ? activeInfo.detail : "",
 
             // For Education and Work Experience
             startDate: activeInfo?.details ? activeInfo.details[0]?.startDate || "" : "",
@@ -453,6 +457,7 @@ const Editor = (props) => {
             degree: activeInformation.details[activeDetailIndex]?.degree || "",
             collegeName: activeInformation.details[activeDetailIndex]?.collegeName || "",
             points: activeInformation.details[activeDetailIndex]?.points || "",
+            others: activeInformation.details[activeDetailIndex]?.others || "",
 
         });
         // eslint-disable-next-line

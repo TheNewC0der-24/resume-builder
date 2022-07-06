@@ -46,6 +46,16 @@
     margin: auto;
 }
 
+.textarea {
+    text-decoration: none !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
+.textarea:focus {
+    border-color: #239ce2 !important;
+}
+
 .saveBtn {
     background-color: #239ce2 !important;
     color: #fff !important;
