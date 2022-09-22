@@ -42,6 +42,25 @@
     border-bottom: none;
 }
 
+.main {
+    display: flex;
+    gap: 30px;
+}
+
+.col1 {
+    flex: 1.3;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.col2 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 p {
     margin-bottom: 0 !important;
 }

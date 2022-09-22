@@ -294,13 +294,13 @@ const Resume = forwardRef((props, ref) => {
                                 }
                             </div>
                         </div>
-                        <div className='row mt-5'>
-                            <div className='col-sm-7'>
+                        <div className={`${styles.main} mt-5`}>
+                            <div className={styles.col1}>
                                 {
                                     columns[0].map(item => sectionDivs[item])
                                 }
                             </div>
-                            <div className='col-sm-5'>
+                            <div className={styles.col2}>
                                 {
                                     columns[1].map(item => sectionDivs[item])
                                 }
